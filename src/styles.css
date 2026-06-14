@@ -400,22 +400,25 @@ button {
 }
 
 .menu-tabs-wrap {
-  background: rgba(248, 245, 238, 0.86);
+  background:
+    linear-gradient(180deg, rgba(248, 245, 238, 0.96), rgba(248, 245, 238, 0.88));
   backdrop-filter: blur(18px);
-  border: 1px solid rgba(200, 155, 47, 0.2);
-  border-radius: 18px;
-  box-shadow: 0 18px 50px rgba(35, 35, 35, 0.08);
+  border-bottom: 1px solid rgba(35, 35, 35, 0.08);
+  box-shadow:
+    0 16px 36px rgba(35, 35, 35, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
   margin-bottom: 40px;
-  padding: 16px 18px 0;
+  padding: 18px 22px 0;
   position: sticky;
   top: 72px;
   z-index: 30;
 }
 
 .menu-tabs {
-  border-bottom: 1px solid rgba(200, 155, 47, 0.28);
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(35, 35, 35, 0.12);
   display: flex;
-  gap: 28px;
+  gap: 26px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -425,27 +428,32 @@ button {
 }
 
 .menu-tabs button {
-  color: rgba(35, 35, 35, 0.55);
+  color: rgba(35, 35, 35, 0.46);
   flex: 0 0 auto;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.18em;
-  padding: 0 0 18px;
+  letter-spacing: 0.24em;
+  padding: 0 0 16px;
   position: relative;
   text-transform: uppercase;
+  transition: color 180ms ease, opacity 180ms ease;
 }
 
 .menu-tabs button::after {
   background: var(--gold);
   bottom: -1px;
   content: "";
-  height: 2px;
+  height: 1px;
   left: 0;
   position: absolute;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 180ms ease;
   width: 100%;
+}
+
+.menu-tabs button:hover {
+  color: rgba(35, 35, 35, 0.78);
 }
 
 .menu-tabs button.is-active {
@@ -695,11 +703,11 @@ button {
 
   .menu-tabs-wrap {
     border-left: 0;
-    border-radius: 0;
     border-right: 0;
     margin-left: -20px;
     margin-right: -20px;
     padding-left: 20px;
+    padding-right: 20px;
     top: 72px;
   }
 

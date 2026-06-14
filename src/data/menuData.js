@@ -1,71 +1,85 @@
 export const menuCategories = [
   {
-    id: 'entradas',
-    label: 'Entradas',
-    eyebrow: 'Soirs',
+    id: 'ensaladas',
+    label: 'Ensaladas',
+    eyebrow: 'Fresh start',
     items: [
       {
         id: 'ensalada-papaya',
         name: 'Ensalada de Papaya',
-        price: 245,
+        price: 235,
         description:
-          'Papaya verde rallada, jitomate cherry, cacahuate y aderezo thai de limon con chile.',
+          'Fresca ensalada de papaya verde rallada, con camaron y aderezo thai con notas citricas y picante.',
         detail:
-          'Fresca, crujiente y ligeramente picante. Ideal para abrir el apetito con notas citricas y dulces.',
+          'Crujiente, fresca y ligeramente picante. Un inicio brillante con el balance acido-salado clasico de Tailandia.',
       },
       {
         id: 'ensalada-papaya-mixta',
-        name: 'Ensalada Papaya Mixta Tropical',
+        name: 'Ensalada Tropical Salsa Tropical',
         price: 350,
         description:
-          'Papaya verde con camaron, mango, hierbas frescas y vinagreta thai.',
+          'Hierbas frescas con camaron, fresa, higo, mango y una salsa fresca.',
         detail:
-          'Una version mas abundante y tropical de la ensalada clasica, con contraste dulce, acido y salino.',
+          'Una ensalada de perfil frutal y aromatico, pensada para una apertura fresca y expresiva.',
       },
       {
         id: 'ensalada-tofu',
-        name: 'Ensalada de Tofu',
-        price: 320,
+        name: 'Ensalada de Toufu',
+        price: 210,
         description:
-          'Tofu suave, vegetales frescos, ajonjoli y salsa thai de la casa.',
+          'Toufu con mezcla de vegetales frescos, hierbas aromaticas y salsa cremosa de alioli.',
         detail:
-          'Ligera y aromatica, pensada para quienes buscan una entrada vegetal con textura sedosa.',
+          'Version vegetal, ligera y aromatica, con textura suave y final cremoso.',
       },
+    ],
+  },
+  {
+    id: 'sopas',
+    label: 'Sopas',
+    eyebrow: 'Broths',
+    items: [
       {
         id: 'sopa-tomyam',
-        name: 'Sopa Tomyam Kung',
+        name: 'Sopa Tom Yam Kum (para 2 personas)',
         price: 360,
         description:
-          'Sopa tradicional thai con camaron, limoncillo, galanga, hojas de lima kaffir y chile.',
+          'Tradicional sopa tailandesa de camaron preparada con lemongrass, galanga, chile y lima.',
         detail:
-          'Porcion para compartir. Caldo intenso, citrico y especiado, con el perfil clasico de Tailandia.',
+          'Aroma intenso y sabor acido-picante. Caldo expresivo, ideal para compartir.',
       },
       {
         id: 'sopa-coco',
-        name: 'Sopa de Leche de Coco',
+        name: 'Sopa de Leche de Coco (para 2 personas)',
         price: 260,
         description:
-          'Caldo cremoso de coco con hierbas thai, hongos y un toque de limon.',
+          'Suave sopa cremosa de leche de coco con champinion y tomate cherry, aroma fresco.',
         detail:
-          'Porcion para compartir. Suave, perfumada y balanceada entre dulzor natural y acidez.',
+          'Cremosa, envolvente y fragante, con un perfil amable y especiado.',
       },
+    ],
+  },
+  {
+    id: 'entradas',
+    label: 'Entradas',
+    eyebrow: 'Small plates',
+    items: [
       {
         id: 'nuggets-harina',
-        name: 'Nuggets de Harina',
+        name: 'Nachos de Harina',
         price: 80,
         description:
-          'Bocados dorados estilo thai, servidos con salsa dulce especiada.',
+          'Crujientes laminas fritas servidas con salsa orientales para compartir.',
         detail:
-          'Una entrada sencilla para acompanar con salsas y compartir al centro.',
+          'Snack ligero para botanear y abrir mesa.',
       },
       {
         id: 'rollo-crujiente',
         name: 'Rollo Crujiente de Pollo con Mango',
-        price: 250,
+        price: 230,
         description:
-          'Rollos fritos rellenos de pollo, mango y vegetales, con salsa agridulce.',
+          'Crujiente rollo de pechuga de pollo relleno de mango fresco y salsa agridulce ligeramente picante, cortado en bocados para compartir.',
         detail:
-          'Crujientes por fuera, jugosos por dentro y con un final dulce tropical.',
+          'Crujiente por fuera, jugoso por dentro y con final tropical.',
       },
       {
         id: 'algas-fritas',
@@ -78,30 +92,30 @@ export const menuCategories = [
       },
       {
         id: 'rollo-namita',
-        name: 'Rollo x Namita',
+        name: 'Rollos Vietnamitas (2 unidades)',
         price: 110,
         description:
-          'Rollitos vietnamitas frescos, rellenos de vegetales y hierbas aromaticas.',
+          'Rollos crujientes fritos relleno de verduras y carne.',
         detail:
-          'Cinco unidades frescas, ligeras y acompanadas con salsa especial.',
+          'Bocado crujiente y aromatico para compartir.',
       },
       {
         id: 'pao',
-        name: 'Pao',
+        name: 'Bao',
         price: 200,
         description:
-          'Pan al vapor estilo bao con relleno de carne y salsa especiada.',
+          'Pan al vapor suave y esponjoso relleno de proteina marinada, vegetales y salsa especial.',
         detail:
-          'Suave, aromatico y servido caliente para conservar su textura.',
+          'Esponjoso, tibio y de perfil umami.',
       },
       {
         id: 'gyozas',
         name: 'Gyozas',
         price: 160,
         description:
-          'Empanaditas al vapor y selladas, rellenas con mezcla de vegetales y proteina.',
+          'Empanadillas doradas al sarten con relleno de carne picada y salsa oriental.',
         detail:
-          'Doradas al punto, con salsa de soya preparada y notas de jengibre.',
+          'Marcadas al sarten, jugosas y servidas al punto.',
       },
       {
         id: 'pollo-satay',
@@ -114,12 +128,12 @@ export const menuCategories = [
       },
       {
         id: 'moo-ping',
-        name: 'Moo Ping',
+        name: 'Mooping',
         price: 85,
         description:
-          'Brochetas de cerdo marinadas con ajo, cilantro y salsa thai.',
+          'Brochetas de cerdo thai marinado, suave por dentro y caramelizado por fuera.',
         detail:
-          'Carne jugosa con notas dulces y especiadas, estilo street food tailandes.',
+          'Street food tailandes con notas dulces y asadas.',
       },
     ],
   },
@@ -131,14 +145,14 @@ export const menuCategories = [
       {
         id: 'curry-rojo',
         name: 'Curry Rojo',
-        price: 280,
+        price: 240,
         description:
-          'Base de curry rojo con leche de coco, bambu, vegetales y albahaca thai.',
+          'Preparado con pasta tradicional de chile rojo, leche de coco cremosa y especias tailandesas.',
         detail:
-          'Disponible con tofu $280, pollo $300, res $320 o camaron $360. Picor medio, final cremoso.',
+          'Sabor intenso, picante y con toques profundos de ajo, hierbas y coco. Disponible con toufu $240, pollo $290, res $320 o camaron $360. Para 2 personas: toufu $380, pollo $450, res $520, camaron $600.',
         options: [
-          { label: 'Tofu', price: 280 },
-          { label: 'Pollo', price: 300 },
+          { label: 'Toufu', price: 240 },
+          { label: 'Pollo', price: 290 },
           { label: 'Res', price: 320 },
           { label: 'Camaron', price: 360 },
         ],
@@ -146,14 +160,14 @@ export const menuCategories = [
       {
         id: 'curry-verde',
         name: 'Curry Verde',
-        price: 280,
+        price: 240,
         description:
-          'Curry verde con leche de coco, berenjena, ejotes, albahaca thai y especias frescas.',
+          'Nuestro curry mas aromatico, elaborado con albahaca thai, leche de coco y hierbas frescas.',
         detail:
-          'Disponible con tofu $280, pollo $300, res $320 o camaron $360. Herbaceo, aromatico y picante.',
+          'Perfil herbal, fresco y ligeramente picante. Disponible con toufu $240, pollo $290, res $320 o camaron $360. Para 2 personas: toufu $380, pollo $450, res $520, camaron $600.',
         options: [
-          { label: 'Tofu', price: 280 },
-          { label: 'Pollo', price: 300 },
+          { label: 'Toufu', price: 240 },
+          { label: 'Pollo', price: 290 },
           { label: 'Res', price: 320 },
           { label: 'Camaron', price: 360 },
         ],
@@ -163,14 +177,14 @@ export const menuCategories = [
         name: 'Curry Especial',
         price: 240,
         description:
-          'Curry de la casa con leche de coco, vegetales y mezcla especial de especias.',
+          'Receta exclusiva de la casa con mezcla especial de especias orientales, leche de coco lemongrass y salsa secreta.',
         detail:
-          'Disponible con tofu $240, pollo $290, res $320 o camaron $380. Mas profundo y especiado.',
+          'Cremoso, aromatico y con un sabor profundo y balanceado. Disponible con toufu $240, pollo $290, res $320 o camaron $360. Para 2 personas: toufu $380, pollo $450, res $520, camaron $600.',
         options: [
-          { label: 'Tofu', price: 240 },
+          { label: 'Toufu', price: 240 },
           { label: 'Pollo', price: 290 },
           { label: 'Res', price: 320 },
-          { label: 'Camaron', price: 380 },
+          { label: 'Camaron', price: 360 },
         ],
       },
     ],
@@ -185,54 +199,70 @@ export const menuCategories = [
         name: 'Arroz Frito con Pina',
         price: 230,
         description:
-          'Arroz salteado al wok con pina, vegetales, huevo y especias thai.',
+          'Arroz salteado estilo thai con pina fresca, camaron, vegetales y balance entre dulce y salado.',
         detail:
-          'Dulce, salado y aromatico, con textura tostada de wok.',
+          'Arroz de wok con perfil tropical y final salino.',
       },
       {
         id: 'pad-thai',
-        name: 'Pad Thai',
+        name: 'PadThai',
         price: 255,
         description:
-          'Tallarines de arroz salteados con salsa tamarindo, huevo, tofu, brotes y cacahuate.',
+          'Un clasico tailandes de sabor agridulce y salado con camaron, brote de soja, cacahuate y cebollin.',
         detail:
-          'El clasico tailandes: acido, dulce y umami, terminado con limon fresco.',
+          'Balance entre tamarindo, wok y textura sedosa de noodles.',
       },
       {
         id: 'tallarines-coco',
         name: 'Tallarines Thai al Coco',
         price: 270,
         description:
-          'Tallarines en salsa cremosa de coco con vegetales y hierbas thai.',
+          'Fideos de arroz en curry rojo con leche de coco, camaron, brotes de soya y aroma de lemongrass.',
         detail:
-          'Cremosidad ligera con perfume de coco y un toque especiado.',
+          'Meloso, fragante y de especia amable.',
       },
       {
         id: 'mama-thai-yen',
-        name: 'Mama Thai Yen',
+        name: 'Mama Thai Ramen',
         price: 190,
         description:
-          'Noodles estilo thai con vegetales, especias de la casa y salsa salteada.',
+          'Ramen estilo tailandes con un huevo estrellado.',
         detail:
-          'Comfort food tailandes, directo y sabroso.',
+          'Confort directo, calido y especiado.',
       },
       {
         id: 'pho-deles',
-        name: 'Pho Deles',
+        name: 'Pho de Res',
         price: 230,
         description:
-          'Sopa de noodles con caldo aromatico, hierbas frescas y vegetales.',
+          'Fideos de arroz en caldo de res aromatico, con laminas de carne, hierbas frescas y un toque de limon.',
         detail:
-          'Caldo profundo y perfumado, servido con guarniciones frescas.',
+          'Ligero, calido y reconfortante.',
       },
       {
         id: 'pad-krao-pao',
         name: 'Pad Krao Pao',
         price: 260,
         description:
-          'Salteado thai con albahaca, chile, ajo, vegetales y arroz jazmin.',
+          'Salteado thai con albahaca, chile, ajo y carne servida con arroz jazmin y huevo frito.',
         detail:
-          'Intenso, aromatico y con caracter callejero tailandes.',
+          'Intenso, aromatico y de caracter callejero tailandes.',
+      },
+    ],
+  },
+  {
+    id: 'postres',
+    label: 'Postres',
+    eyebrow: 'Dessert',
+    items: [
+      {
+        id: 'arroz-glutinoso-mango',
+        name: 'Arroz Glutinoso con Mango',
+        price: 160,
+        description:
+          'Arroz glutinoso con crema de coco y mango fresco, un postre clasico tailandes.',
+        detail:
+          'Final suave, cremoso y fragante con mango maduro.',
       },
     ],
   },

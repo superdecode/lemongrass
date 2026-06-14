@@ -6,6 +6,12 @@ import logoFull from '../Lemongrass.png'
 import heroInterior from './assets/imagery/lemongrass-hero-interior.jpg'
 import signatureDishes from './assets/imagery/lemongrass-signature-dishes.jpg'
 import chefPlating from './assets/imagery/lemongrass-chef-plating.jpg'
+import categorySalads from './assets/imagery/category-salads.jpg'
+import categorySoups from './assets/imagery/category-soups.jpg'
+import categoryEntradas from './assets/imagery/category-entradas.jpg'
+import categoryCurrys from './assets/imagery/category-currys.jpg'
+import categoryNoodles from './assets/imagery/category-noodles.jpg'
+import categoryPostres from './assets/imagery/category-postres.jpg'
 import { menuCategories } from './data/menuData.js'
 
 const pages = [
@@ -16,9 +22,17 @@ const pages = [
 ]
 
 const categoryCopy = {
+  ensaladas: {
+    title: 'Ensaladas',
+    note: 'Papaya verde, mango, tofu y hierbas frescas con acidez limpia.',
+  },
+  sopas: {
+    title: 'Sopas',
+    note: 'Caldos aromaticos con coco, limoncillo y especias thai.',
+  },
   entradas: {
-    title: 'Entrantes',
-    note: 'Aromas citricos, texturas crujientes y primeras notas de Bangkok.',
+    title: 'Entradas',
+    note: 'Bocados para compartir, frituras ligeras y street food refinado.',
   },
   currys: {
     title: 'Currys',
@@ -28,14 +42,27 @@ const categoryCopy = {
     title: 'Arroces & Noodles',
     note: 'Wok caliente, tamarindo, hierbas frescas y arroz jazmin.',
   },
+  postres: {
+    title: 'Postres',
+    note: 'Finales suaves con coco, arroz glutinoso y fruta fresca.',
+  },
 }
 
 const menuHighlights = [
-  'Sopa Tomyam Kung',
+  'Sopa Tom Yam Kum (para 2 personas)',
   'Curry Verde',
-  'Pad Thai',
+  'PadThai',
   'Rollo Crujiente de Pollo con Mango',
 ]
+
+const categoryImages = {
+  ensaladas: categorySalads,
+  sopas: categorySoups,
+  entradas: categoryEntradas,
+  currys: categoryCurrys,
+  'arroces-noodles': categoryNoodles,
+  postres: categoryPostres,
+}
 
 const dishCropPositions = [
   '45% 42%',
@@ -54,12 +81,7 @@ const dishCropPositions = [
 ]
 
 function getDishVisual(categoryId, index = 0) {
-  const image =
-    categoryId === 'currys'
-      ? signatureDishes
-      : categoryId === 'arroces-noodles'
-        ? signatureDishes
-        : chefPlating
+  const image = categoryImages[categoryId] ?? signatureDishes
 
   return {
     image,
@@ -371,7 +393,7 @@ function MenuPage() {
       <PageHero
         label="Menu real"
         title="La carta de Lemongrass"
-        copy="Entradas aromaticas, currys con leche de coco y noodles salteados al wok. Precios e informacion tomados del menu fisico."
+        copy="Ensaladas frescas, sopas aromaticas, entradas para compartir, currys con leche de coco, noodles salteados al wok y postres tailandeses."
       />
 
       <div className="section-padding pt-10">
@@ -400,7 +422,7 @@ function MenuPage() {
               className="grid gap-10 lg:grid-cols-[.72fr_1.28fr]"
             >
               <aside className="menu-art-panel sticky top-24 h-fit overflow-hidden bg-emerald p-8 text-ivory">
-                <img src={activeId === 'currys' ? signatureDishes : chefPlating} alt="" className="menu-art-image" />
+                <img src={categoryImages[activeId] ?? signatureDishes} alt="" className="menu-art-image" />
                 <div className="absolute inset-0 bg-emerald/70" />
                 <div className="relative z-10">
                 <p className="label text-gold">{activeCategory.eyebrow}</p>
@@ -577,9 +599,9 @@ function ContactPage() {
           <p className="label text-gold">Contacto directo</p>
           <h2 className="mt-5 font-serif text-5xl leading-none">Te esperamos en CDMX</h2>
           <div className="mt-10 space-y-7">
-            <ContactLine icon="clock" title="Horario" copy="Martes a domingo · 13:00 a 23:00" />
+            <ContactLine icon="clock" title="Horario" copy="Abierto todos los dias · 12:30 a 23:00 · Sabado hasta 22:00" />
             <ContactLine icon="phone" title="Telefono" copy="+52 55 0000 0000" />
-            <ContactLine icon="pin" title="Direccion" copy="Reforma · Ciudad de Mexico" />
+            <ContactLine icon="pin" title="Direccion" copy="C. Rio Lerma 186, Cuauhtemoc, 06500, Ciudad de Mexico" />
           </div>
           <p className="mt-12 max-w-md font-accent text-xl italic text-ivory/75">
             Recomendamos reservar con 48 horas de anticipacion.
@@ -589,8 +611,8 @@ function ContactPage() {
       </section>
       <section className="section-padding">
         <Reveal className="mx-auto grid max-w-[1180px] gap-8 md:grid-cols-3">
-          <InfoColumn title="Direccion" copy="Paseo de la Reforma, Ciudad de Mexico" />
-          <InfoColumn title="Horarios" copy="Comida y cena de martes a domingo" />
+          <InfoColumn title="Direccion" copy="C. Rio Lerma 186, Cuauhtemoc, 06500, Ciudad de Mexico" />
+          <InfoColumn title="Horarios" copy="Todos los dias · 12:30 a 23:00 · Sabado hasta 22:00" />
           <InfoColumn title="Redes Sociales" copy="@lemongrass_cuisine" icons />
         </Reveal>
       </section>
