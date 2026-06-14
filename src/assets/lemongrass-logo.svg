@@ -1,0 +1,18 @@
+<svg width="520" height="520" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="260" cy="260" r="252" fill="#F8F7F0"/>
+  <circle cx="260" cy="260" r="247" stroke="#D4AF37" stroke-opacity=".18"/>
+  <path d="M260 94C278 170 323 224 390 252" stroke="#C5A33A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M260 94C242 170 197 224 130 252" stroke="#C5A33A" stroke-width="16" stroke-linecap="round"/>
+  <path d="M133 251C116 260 102 251 104 233C105 222 111 214 121 209" stroke="#C5A33A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M386 251C403 260 417 251 415 233C414 222 408 214 398 209" stroke="#C5A33A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M216 275L183 205" stroke="#C5A33A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M236 271L219 188" stroke="#C5A33A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M260 270V154" stroke="#C5A33A" stroke-width="18" stroke-linecap="round"/>
+  <path d="M284 271L301 188" stroke="#C5A33A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M304 275L337 205" stroke="#C5A33A" stroke-width="10" stroke-linecap="round"/>
+  <text x="260" y="362" text-anchor="middle" font-family="Georgia, serif" font-size="76" font-style="italic" font-weight="700" fill="#C5A33A">Lemongrass</text>
+  <text x="260" y="421" text-anchor="middle" font-family="Georgia, serif" font-size="33" letter-spacing="8" fill="#C5A33A">THAI CUISINE</text>
+  <path d="M81 408H154M366 408H439" stroke="#C5A33A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M177 408L189 396L201 408L189 420L177 408Z" fill="#C5A33A"/>
+  <path d="M319 408L331 396L343 408L331 420L319 408Z" fill="#C5A33A"/>
+</svg>
