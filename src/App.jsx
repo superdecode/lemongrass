@@ -132,6 +132,14 @@ export default function App() {
     }
   }, [])
 
+  useEffect(() => {
+    document.body.classList.toggle('nav-open', drawerOpen)
+
+    return () => {
+      document.body.classList.remove('nav-open')
+    }
+  }, [drawerOpen])
+
   const navigate = (pageId) => {
     if (pageId === activePage) {
       setDrawerOpen(false)
@@ -171,7 +179,7 @@ export default function App() {
       </AnimatePresence>
 
       <Footer onNavigate={navigate} />
-      <FloatingReserve onNavigate={navigate} />
+      <FloatingReserve activePage={activePage} onNavigate={navigate} />
     </div>
   )
 }
@@ -210,7 +218,13 @@ function Nav({ activePage, drawerOpen, scrolled, onNavigate, onToggleDrawer }) {
           Reserve una Mesa
         </button>
 
-        <button className="hamburger md:hidden" onClick={onToggleDrawer} aria-label="Abrir menu">
+        <button
+          className={cx('hamburger md:hidden', drawerOpen && 'is-open')}
+          onClick={onToggleDrawer}
+          aria-label={drawerOpen ? 'Cerrar menu' : 'Abrir menu'}
+          aria-expanded={drawerOpen}
+          aria-controls="mobile-nav-drawer"
+        >
           <span />
           <span />
           <span />
@@ -219,32 +233,46 @@ function Nav({ activePage, drawerOpen, scrolled, onNavigate, onToggleDrawer }) {
 
       <AnimatePresence>
         {drawerOpen && (
-          <motion.aside
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', stiffness: 280, damping: 32 }}
-            className="fixed right-0 top-0 z-[60] flex h-screen w-[82vw] max-w-sm flex-col bg-emerald p-8 text-ivory"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-charcoal/45 backdrop-blur-sm md:hidden"
+            onClick={onToggleDrawer}
           >
-            <button className="mb-12 self-end text-sm uppercase tracking-[0.3em]" onClick={onToggleDrawer}>
-              Cerrar
-            </button>
-            <img src={logoText} alt="Lemongrass Thai Cuisine" className="mb-12 w-52 brightness-0 invert" />
-            <div className="flex flex-col gap-7">
-              {pages.map((page) => (
-                <button
-                  key={page.id}
-                  onClick={() => onNavigate(page.id)}
-                  className="font-serif text-4xl text-left"
-                >
-                  {page.label}
+            <motion.aside
+              id="mobile-nav-drawer"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 280, damping: 32 }}
+              className="ml-auto flex h-screen w-[88vw] max-w-sm flex-col bg-emerald px-6 pb-8 pt-6 text-ivory shadow-[0_28px_80px_rgba(0,0,0,.28)]"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="mb-10 flex items-center justify-between gap-4">
+                <img src={logoText} alt="Lemongrass Thai Cuisine" className="w-40 brightness-0 invert" />
+                <button className="drawer-close" onClick={onToggleDrawer}>
+                  Cerrar
                 </button>
-              ))}
-            </div>
-            <button className="btn mt-auto border border-gold text-gold" onClick={() => onNavigate('contacto')}>
-              Reservar
-            </button>
-          </motion.aside>
+              </div>
+              <div className="flex flex-col gap-5 border-t border-ivory/15 pt-8">
+                {pages.map((page) => (
+                  <button
+                    key={page.id}
+                    onClick={() => onNavigate(page.id)}
+                    className={cx('drawer-link', activePage === page.id && 'is-active')}
+                  >
+                    {page.label}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-auto border-t border-gold/20 pt-6">
+                <button className="btn w-full justify-center border border-gold text-gold" onClick={() => onNavigate('contacto')}>
+                  Reservar mesa
+                </button>
+              </div>
+            </motion.aside>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>
@@ -254,8 +282,8 @@ function Nav({ activePage, drawerOpen, scrolled, onNavigate, onToggleDrawer }) {
 function HomePage({ onNavigate }) {
   return (
     <>
-      <section className="hero-stage relative flex min-h-[calc(100svh-72px)] items-center justify-center overflow-hidden px-5 py-24 text-center text-ivory">
-        <img src={heroInterior} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      <section className="hero-stage relative flex min-h-[calc(100svh-72px)] items-center justify-center overflow-hidden px-5 py-20 text-center text-ivory md:py-24">
+        <img src={heroInterior} alt="" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(35,35,35,.82),rgba(35,35,35,.36),rgba(15,92,77,.74))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(200,155,47,.12),transparent_28rem)]" />
         <div className="paper-grain absolute inset-0" />
@@ -266,22 +294,22 @@ function HomePage({ onNavigate }) {
           transition={{ duration: 0.75, ease: 'easeOut' }}
           className="relative z-10 mx-auto max-w-5xl"
         >
-          <img src={logoMark} alt="" className="mx-auto mb-7 h-24 w-24 object-contain drop-shadow-[0_0_34px_rgba(200,155,47,.32)]" />
+          <img src={logoMark} alt="" className="mx-auto mb-6 h-20 w-20 object-contain drop-shadow-[0_0_34px_rgba(200,155,47,.32)] md:mb-7 md:h-24 md:w-24" />
           <p className="label text-gold">Ciudad de Mexico · Cocina Tailandesa</p>
           <div className="mx-auto my-7 h-px w-20 bg-gold" />
-          <h1 className="font-serif text-[44px] font-medium leading-[0.95] md:text-[72px]">
+          <h1 className="font-serif text-[38px] font-medium leading-[0.95] sm:text-[44px] md:text-[72px]">
             Una experiencia culinaria
             <br />
             desde Bangkok
             <br />
             hasta el corazon de CDMX
           </h1>
-          <p className="mx-auto mt-7 max-w-2xl font-accent text-xl italic text-ivory/75 md:text-2xl">
+          <p className="mx-auto mt-6 max-w-2xl px-2 font-accent text-lg italic text-ivory/75 sm:text-xl md:mt-7 md:text-2xl">
             Sabores autenticos. Presentacion de alta cocina.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button className="btn btn-emerald" onClick={() => onNavigate('menu')}>Ver Menu</button>
-            <button className="btn btn-outline-gold" onClick={() => onNavigate('contacto')}>Reservar</button>
+          <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:mt-10 sm:flex-row sm:gap-4">
+            <button className="btn btn-emerald w-full sm:w-auto" onClick={() => onNavigate('menu')}>Ver Menu</button>
+            <button className="btn btn-outline-gold w-full sm:w-auto" onClick={() => onNavigate('contacto')}>Reservar</button>
           </div>
         </motion.div>
         <div className="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 text-gold" aria-hidden="true">
@@ -326,7 +354,7 @@ function AboutTeaser({ onNavigate }) {
         <button className="btn btn-emerald mt-10" onClick={() => onNavigate('acerca')}>Conocer mas</button>
       </div>
       <div className="lemongrass-pattern relative flex min-h-[420px] items-center justify-center overflow-hidden bg-emerald p-10">
-        <img src={chefPlating} alt="" className="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-luminosity" />
+        <img src={chefPlating} alt="" className="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-luminosity" loading="lazy" decoding="async" />
         <div className="absolute inset-0 bg-emerald/75" />
         <span className="absolute font-accent text-[220px] italic leading-none text-gold/10">L</span>
         <div className="relative z-10 max-w-xs text-center">
@@ -359,7 +387,7 @@ function SignatureMenu() {
           </p>
         </div>
         <div className="feature-image mb-12">
-          <img src={signatureDishes} alt="Curry verde y Pad Thai de Lemongrass Thai Cuisine" />
+          <img src={signatureDishes} alt="Curry verde y Pad Thai de Lemongrass Thai Cuisine" loading="lazy" decoding="async" />
           <div className="feature-caption">
             <span>Signature tasting</span>
             <strong>Currys · Wok · Hierbas frescas</strong>
@@ -369,7 +397,7 @@ function SignatureMenu() {
           {items.map((item, index) => (
             <article key={item.id} className={cx('signature-card', index % 2 && 'md:translate-y-8')}>
               <div className="food-frame mb-6" data-dish={index}>
-                <img src={index % 2 ? chefPlating : signatureDishes} alt="" />
+                <img src={index % 2 ? chefPlating : signatureDishes} alt="" loading="lazy" decoding="async" />
               </div>
               <p className="label text-gold">{item.category}</p>
               <h3 className="mt-3 font-serif text-3xl leading-none">{item.name}</h3>
@@ -419,23 +447,23 @@ function MenuPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.24 }}
-              className="grid gap-10 lg:grid-cols-[.72fr_1.28fr]"
+              className="grid gap-6 lg:gap-10 lg:grid-cols-[.72fr_1.28fr]"
             >
-              <aside className="menu-art-panel sticky top-24 h-fit overflow-hidden bg-emerald p-8 text-ivory">
-                <img src={categoryImages[activeId] ?? signatureDishes} alt="" className="menu-art-image" />
+              <aside className="menu-art-panel h-fit overflow-hidden bg-emerald p-6 text-ivory sm:p-8 lg:sticky lg:top-28">
+                <img src={categoryImages[activeId] ?? signatureDishes} alt="" className="menu-art-image" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-emerald/70" />
                 <div className="relative z-10">
-                <p className="label text-gold">{activeCategory.eyebrow}</p>
-                <h2 className="mt-5 font-serif text-5xl leading-none">
-                  {categoryCopy[activeId]?.title ?? activeCategory.label}
-                </h2>
-                <p className="mt-6 text-sm leading-7 text-ivory/72">{categoryCopy[activeId]?.note}</p>
-                <div className="mt-10 border border-gold/35 bg-charcoal/35 p-5 backdrop-blur-sm">
-                  <p className="label text-gold">Servicio</p>
-                  <p className="mt-3 text-sm leading-7 text-ivory/70">
-                    Toca cualquier platillo para ver detalles, opciones y precio.
-                  </p>
-                </div>
+                  <p className="label text-gold">{activeCategory.eyebrow}</p>
+                  <h2 className="mt-5 font-serif text-4xl leading-none sm:text-5xl">
+                    {categoryCopy[activeId]?.title ?? activeCategory.label}
+                  </h2>
+                  <p className="mt-5 text-sm leading-7 text-ivory/72">{categoryCopy[activeId]?.note}</p>
+                  <div className="mt-8 border border-gold/35 bg-charcoal/35 p-5 backdrop-blur-sm">
+                    <p className="label text-gold">Servicio</p>
+                    <p className="mt-3 text-sm leading-7 text-ivory/70">
+                      Toca cualquier platillo para ver detalles, opciones y precio.
+                    </p>
+                  </div>
                 </div>
               </aside>
 
@@ -498,17 +526,17 @@ function DishSheet({ dish, onClose }) {
         exit={{ y: 80, opacity: 0 }}
         transition={{ type: 'spring', stiffness: 330, damping: 32 }}
         onClick={(event) => event.stopPropagation()}
-        className="w-full max-w-2xl bg-ivory p-7 text-charcoal md:p-10"
+        className="w-full max-w-2xl bg-ivory p-5 text-charcoal sm:p-7 md:p-10"
       >
         <div className="dish-sheet-image mb-7">
-          <img src={visual.image} alt={dish.name} style={{ objectPosition: visual.position }} />
+          <img src={visual.image} alt={dish.name} style={{ objectPosition: visual.position }} loading="lazy" decoding="async" />
         </div>
-        <div className="mb-7 flex items-start justify-between gap-5">
+        <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p className="label text-gold">{dish.category}</p>
-            <h3 className="mt-3 font-serif text-5xl leading-none">{dish.name}</h3>
+            <h3 className="mt-3 font-serif text-4xl leading-none sm:text-5xl">{dish.name}</h3>
           </div>
-          <p className="shrink-0 bg-emerald px-4 py-2 text-sm font-black text-ivory">{formatPrice(dish.price)}</p>
+          <p className="w-fit shrink-0 bg-emerald px-4 py-2 text-sm font-black text-ivory">{formatPrice(dish.price)}</p>
         </div>
         <p className="text-lg leading-8 text-charcoal/75">{dish.description}</p>
         <p className="mt-4 text-sm leading-7 text-charcoal/60">{dish.detail}</p>
@@ -533,7 +561,7 @@ function DishThumb({ categoryId, index, name }) {
 
   return (
     <span className="dish-thumb" aria-hidden="true">
-      <img src={visual.image} alt={name} style={{ objectPosition: visual.position }} />
+      <img src={visual.image} alt={name} style={{ objectPosition: visual.position }} loading="lazy" decoding="async" />
     </span>
   )
 }
@@ -565,7 +593,7 @@ function AboutPage({ onNavigate }) {
       <section className="section-padding">
         <Reveal className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-[.9fr_1.1fr] md:items-center">
           <div className="brand-card">
-            <img src={chefPlating} alt="" className="brand-card-photo" />
+            <img src={chefPlating} alt="" className="brand-card-photo" loading="lazy" decoding="async" />
             <img src={logoFull} alt="Lemongrass Thai Cuisine" className="mx-auto w-72" />
           </div>
           <div>
@@ -594,7 +622,7 @@ function ContactPage() {
       <section className="grid min-h-[720px] md:grid-cols-2">
         <div className="lemongrass-pattern bg-emerald px-5 py-16 text-ivory md:px-16 lg:px-24">
           <div className="contact-photo mb-10">
-            <img src={heroInterior} alt="Interior de Lemongrass Thai Cuisine" />
+            <img src={heroInterior} alt="Interior de Lemongrass Thai Cuisine" loading="lazy" decoding="async" />
           </div>
           <p className="label text-gold">Contacto directo</p>
           <h2 className="mt-5 font-serif text-5xl leading-none">Te esperamos en CDMX</h2>
@@ -665,13 +693,13 @@ function ExperienceSection() {
 
 function PageHero({ label, title, copy }) {
   return (
-    <section className="page-hero relative overflow-hidden bg-charcoal px-5 py-24 text-center text-ivory md:py-32">
+    <section className="page-hero relative overflow-hidden bg-charcoal px-5 py-20 text-center text-ivory md:py-32">
       <div className="paper-grain absolute inset-0" />
       <div className="relative z-10 mx-auto max-w-4xl">
         <p className="label text-gold">{label}</p>
         <div className="mx-auto my-7 h-px w-20 bg-gold" />
-        <h1 className="font-serif text-5xl leading-none md:text-7xl">{title}</h1>
-        <p className="mx-auto mt-7 max-w-2xl text-base leading-8 text-ivory/70">{copy}</p>
+        <h1 className="font-serif text-4xl leading-none sm:text-5xl md:text-7xl">{title}</h1>
+        <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 text-ivory/70 sm:text-base sm:leading-8 md:mt-7">{copy}</p>
       </div>
     </section>
   )
@@ -693,7 +721,7 @@ function ReservationForm() {
     >
       <p className="label text-gold">Formulario</p>
       <h2 className="mt-5 font-serif text-5xl leading-none">Reserva tu mesa</h2>
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-10 grid gap-5 md:grid-cols-2 md:gap-6">
         {fields.map((field) => (
           <label key={field} className="floating-field">
             <input
@@ -757,7 +785,9 @@ function Footer({ onNavigate }) {
   )
 }
 
-function FloatingReserve({ onNavigate }) {
+function FloatingReserve({ activePage, onNavigate }) {
+  if (activePage === 'contacto') return null
+
   return (
     <button className="floating-reserve" onClick={() => onNavigate('contacto')}>
       Reservar

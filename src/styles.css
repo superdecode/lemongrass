@@ -36,6 +36,10 @@ body {
   font-family: Manrope, "Helvetica Neue", sans-serif;
 }
 
+body.nav-open {
+  overflow: hidden;
+}
+
 button,
 input {
   font: inherit;
@@ -43,6 +47,10 @@ input {
 
 button {
   cursor: pointer;
+}
+
+img {
+  display: block;
 }
 
 ::selection {
@@ -190,6 +198,8 @@ button {
 .hamburger {
   display: grid;
   gap: 5px;
+  position: relative;
+  transition: transform 180ms ease;
   width: 30px;
 }
 
@@ -197,7 +207,48 @@ button {
   background: var(--charcoal);
   display: block;
   height: 1px;
+  transform-origin: center;
+  transition: transform 180ms ease, opacity 180ms ease;
   width: 100%;
+}
+
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.drawer-close {
+  border: 1px solid rgba(248, 245, 238, 0.24);
+  border-radius: 999px;
+  color: var(--ivory);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  min-height: 38px;
+  padding: 0 14px;
+  text-transform: uppercase;
+}
+
+.drawer-link {
+  color: rgba(248, 245, 238, 0.72);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: clamp(32px, 8vw, 44px);
+  line-height: 1;
+  text-align: left;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.drawer-link.is-active,
+.drawer-link:hover {
+  color: var(--ivory);
+  transform: translateX(4px);
 }
 
 .hero-stage,
@@ -401,26 +452,28 @@ button {
 
 .menu-tabs-wrap {
   background:
-    linear-gradient(180deg, rgba(248, 245, 238, 0.96), rgba(248, 245, 238, 0.88));
+    linear-gradient(180deg, rgba(248, 245, 238, 0.97), rgba(248, 245, 238, 0.92));
   backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(35, 35, 35, 0.08);
+  border: 1px solid rgba(200, 155, 47, 0.14);
+  border-radius: 24px;
   box-shadow:
     0 16px 36px rgba(35, 35, 35, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
   margin-bottom: 40px;
-  padding: 18px 22px 0;
+  padding: 14px;
   position: sticky;
-  top: 72px;
+  top: 84px;
   z-index: 30;
 }
 
 .menu-tabs {
-  align-items: flex-end;
-  border-bottom: 1px solid rgba(35, 35, 35, 0.12);
+  align-items: center;
   display: flex;
-  gap: 26px;
+  gap: 10px;
   overflow-x: auto;
+  padding-bottom: 2px;
   scrollbar-width: none;
+  scroll-snap-type: x proximity;
 }
 
 .menu-tabs::-webkit-scrollbar {
@@ -428,40 +481,36 @@ button {
 }
 
 .menu-tabs button {
-  color: rgba(35, 35, 35, 0.46);
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: rgba(35, 35, 35, 0.56);
   flex: 0 0 auto;
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.24em;
-  padding: 0 0 16px;
+  letter-spacing: 0.2em;
+  padding: 12px 18px;
   position: relative;
+  scroll-snap-align: start;
   text-transform: uppercase;
-  transition: color 180ms ease, opacity 180ms ease;
+  transition: color 180ms ease, opacity 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
 .menu-tabs button::after {
-  background: var(--gold);
-  bottom: -1px;
-  content: "";
-  height: 1px;
-  left: 0;
-  position: absolute;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 180ms ease;
-  width: 100%;
+  content: none;
 }
 
 .menu-tabs button:hover {
-  color: rgba(35, 35, 35, 0.78);
+  border-color: rgba(200, 155, 47, 0.3);
+  color: rgba(35, 35, 35, 0.85);
+  transform: translateY(-1px);
 }
 
 .menu-tabs button.is-active {
-  color: var(--charcoal);
-}
-
-.menu-tabs button.is-active::after {
-  transform: scaleX(1);
+  background: var(--charcoal);
+  border-color: var(--charcoal);
+  color: var(--ivory);
+  box-shadow: 0 12px 26px rgba(35, 35, 35, 0.12);
 }
 
 .menu-art-panel {
@@ -485,6 +534,7 @@ button {
 .menu-row {
   align-items: flex-start;
   border-bottom: 1px dashed rgba(35, 35, 35, 0.22);
+  border-radius: 20px;
   display: flex;
   gap: 18px;
   padding: 24px 0;
@@ -598,6 +648,7 @@ button {
   border-bottom: 1px solid rgba(15, 92, 77, 0.5);
   border-radius: 0;
   color: var(--charcoal);
+  min-height: 48px;
   outline: none;
   padding: 14px 0 10px;
   width: 100%;
@@ -634,6 +685,11 @@ button {
   border-bottom-color: var(--gold);
 }
 
+.floating-field input[type="date"],
+.floating-field input[type="time"] {
+  appearance: none;
+}
+
 .floating-field input:focus + span,
 .floating-field input:not(:placeholder-shown) + span {
   color: var(--gold);
@@ -658,21 +714,38 @@ button {
 }
 
 .floating-reserve {
-  background: var(--gold);
-  bottom: 18px;
-  color: var(--charcoal);
+  background: rgba(35, 35, 35, 0.94);
+  border: 1px solid rgba(200, 155, 47, 0.42);
+  border-radius: 999px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  color: var(--ivory);
   display: none;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
-  letter-spacing: 0.2em;
-  padding: 14px 18px;
+  letter-spacing: 0.22em;
+  padding: 12px 16px;
   position: fixed;
-  right: 18px;
+  right: 16px;
+  box-shadow: 0 14px 34px rgba(35, 35, 35, 0.24);
   text-transform: uppercase;
   z-index: 45;
 }
 
 @media (max-width: 767px) {
+  .section-padding {
+    padding: 84px 20px;
+  }
+
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+  }
+
+  .btn {
+    min-height: 50px;
+    padding: 0 18px;
+  }
+
   .floating-reserve {
     display: block;
   }
@@ -681,7 +754,7 @@ button {
     display: grid;
     grid-template-columns: 92px 1fr;
     gap: 10px 14px;
-    padding: 20px 0;
+    padding: 16px 14px;
   }
 
   .menu-row-index {
@@ -690,6 +763,7 @@ button {
 
   .menu-row .price {
     grid-column: 2;
+    justify-self: start;
     margin-top: 0;
   }
 
@@ -702,13 +776,24 @@ button {
   }
 
   .menu-tabs-wrap {
-    border-left: 0;
-    border-right: 0;
     margin-left: -20px;
     margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 12px 16px;
     top: 72px;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+
+  .menu-tabs {
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .menu-tabs button {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    padding: 11px 14px;
   }
 
   .signature-card {
@@ -727,5 +812,29 @@ button {
   .dish-thumb,
   .dish-sheet-image {
     border-radius: 18px 18px 4px 18px;
+  }
+
+  .feature-caption {
+    bottom: 18px;
+    left: 18px;
+    right: 18px;
+  }
+
+  .feature-caption strong {
+    font-size: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
