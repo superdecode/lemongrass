@@ -196,11 +196,21 @@ img {
 }
 
 .hamburger {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(200, 155, 47, 0.18);
+  border-radius: 999px;
+  box-shadow:
+    0 10px 24px rgba(35, 35, 35, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.52);
   display: grid;
   gap: 5px;
+  justify-items: center;
+  min-height: 42px;
+  padding: 0 12px;
   position: relative;
   transition: transform 180ms ease;
-  width: 30px;
+  width: 42px;
 }
 
 .hamburger span {
@@ -209,7 +219,7 @@ img {
   height: 1px;
   transform-origin: center;
   transition: transform 180ms ease, opacity 180ms ease;
-  width: 100%;
+  width: 18px;
 }
 
 .hamburger.is-open span:nth-child(1) {
@@ -225,6 +235,7 @@ img {
 }
 
 .drawer-close {
+  background: rgba(248, 245, 238, 0.08);
   border: 1px solid rgba(248, 245, 238, 0.24);
   border-radius: 999px;
   color: var(--ivory);
@@ -714,8 +725,8 @@ img {
 }
 
 .floating-reserve {
-  background: rgba(35, 35, 35, 0.94);
-  border: 1px solid rgba(200, 155, 47, 0.42);
+  background: rgba(15, 92, 77, 0.96);
+  border: 1px solid rgba(200, 155, 47, 0.34);
   border-radius: 999px;
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   color: var(--ivory);
@@ -723,10 +734,10 @@ img {
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.22em;
-  padding: 12px 16px;
+  padding: 12px 18px;
   position: fixed;
   right: 16px;
-  box-shadow: 0 14px 34px rgba(35, 35, 35, 0.24);
+  box-shadow: 0 16px 38px rgba(35, 35, 35, 0.2);
   text-transform: uppercase;
   z-index: 45;
 }
@@ -746,8 +757,22 @@ img {
     padding: 0 18px;
   }
 
+  .nav-shell {
+    background: rgba(248, 245, 238, 0.88);
+  }
+
+  .nav-shell.is-scrolled {
+    background: rgba(248, 245, 238, 0.96);
+    box-shadow: 0 14px 36px rgba(35, 35, 35, 0.08);
+  }
+
   .floating-reserve {
     display: block;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    padding: 11px 16px;
+    right: 14px;
   }
 
   .menu-row {
@@ -779,7 +804,7 @@ img {
     margin-left: -20px;
     margin-right: -20px;
     padding: 12px 16px;
-    top: 72px;
+    top: 64px;
     border-left: 0;
     border-right: 0;
     border-radius: 0;

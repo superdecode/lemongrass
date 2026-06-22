@@ -169,7 +169,7 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-          className="pt-[72px]"
+          className="pt-[64px] md:pt-[72px]"
         >
           {activePage === 'inicio' && <HomePage onNavigate={navigate} />}
           {activePage === 'menu' && <MenuPage />}
@@ -179,7 +179,12 @@ export default function App() {
       </AnimatePresence>
 
       <Footer onNavigate={navigate} />
-      <FloatingReserve activePage={activePage} onNavigate={navigate} />
+      <FloatingReserve
+        activePage={activePage}
+        drawerOpen={drawerOpen}
+        scrolled={scrolled}
+        onNavigate={navigate}
+      />
     </div>
   )
 }
@@ -187,16 +192,16 @@ export default function App() {
 function Nav({ activePage, drawerOpen, scrolled, onNavigate, onToggleDrawer }) {
   return (
     <header className={cx('nav-shell fixed inset-x-0 top-0 z-50', scrolled && 'is-scrolled')}>
-      <nav className="mx-auto flex h-[72px] max-w-[1360px] items-center justify-between px-5 md:px-10">
+      <nav className="mx-auto flex h-[64px] max-w-[1360px] items-center justify-between px-4 md:h-[72px] md:px-10">
         <button
-          className="flex items-center gap-3 text-left"
+          className="flex items-center gap-2.5 text-left md:gap-3"
           onClick={() => onNavigate('inicio')}
           aria-label="Ir al inicio"
         >
-          <img src={logoMark} alt="" className="h-10 w-10 object-contain" />
+          <img src={logoMark} alt="" className="h-9 w-9 object-contain md:h-10 md:w-10" />
           <span className="leading-none">
-            <span className="block font-serif text-[22px] text-gold">Lemongrass</span>
-            <span className="block font-sans text-[9px] font-bold uppercase tracking-[0.32em] text-charcoal">
+            <span className="block font-serif text-[20px] text-gold md:text-[22px]">Lemongrass</span>
+            <span className="block font-sans text-[8px] font-bold uppercase tracking-[0.28em] text-charcoal md:text-[9px] md:tracking-[0.32em]">
               Thai Cuisine
             </span>
           </span>
@@ -246,11 +251,11 @@ function Nav({ activePage, drawerOpen, scrolled, onNavigate, onToggleDrawer }) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 280, damping: 32 }}
-              className="ml-auto flex h-screen w-[88vw] max-w-sm flex-col bg-emerald px-6 pb-8 pt-6 text-ivory shadow-[0_28px_80px_rgba(0,0,0,.28)]"
+              className="ml-auto flex h-screen w-[84vw] max-w-[340px] flex-col bg-emerald px-5 pb-8 pt-5 text-ivory shadow-[0_28px_80px_rgba(0,0,0,.28)]"
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="mb-10 flex items-center justify-between gap-4">
-                <img src={logoText} alt="Lemongrass Thai Cuisine" className="w-40 brightness-0 invert" />
+              <div className="mb-8 flex items-center justify-between gap-4">
+                <img src={logoText} alt="Lemongrass Thai Cuisine" className="w-32 brightness-0 invert" />
                 <button className="drawer-close" onClick={onToggleDrawer}>
                   Cerrar
                 </button>
@@ -282,7 +287,7 @@ function Nav({ activePage, drawerOpen, scrolled, onNavigate, onToggleDrawer }) {
 function HomePage({ onNavigate }) {
   return (
     <>
-      <section className="hero-stage relative flex min-h-[calc(100svh-72px)] items-center justify-center overflow-hidden px-5 py-20 text-center text-ivory md:py-24">
+      <section className="hero-stage relative flex min-h-[calc(100svh-64px)] items-center justify-center overflow-hidden px-5 py-20 text-center text-ivory md:min-h-[calc(100svh-72px)] md:py-24">
         <img src={heroInterior} alt="" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(35,35,35,.82),rgba(35,35,35,.36),rgba(15,92,77,.74))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(200,155,47,.12),transparent_28rem)]" />
@@ -785,12 +790,12 @@ function Footer({ onNavigate }) {
   )
 }
 
-function FloatingReserve({ activePage, onNavigate }) {
-  if (activePage === 'contacto') return null
+function FloatingReserve({ activePage, drawerOpen, scrolled, onNavigate }) {
+  if (activePage === 'contacto' || activePage === 'inicio' || drawerOpen || !scrolled) return null
 
   return (
     <button className="floating-reserve" onClick={() => onNavigate('contacto')}>
-      Reservar
+      Reserva
     </button>
   )
 }
