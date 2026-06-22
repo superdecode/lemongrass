@@ -220,7 +220,7 @@ function Nav({ activePage, drawerOpen, scrolled, onNavigate, onToggleDrawer }) {
         </div>
 
         <button className="hidden btn btn-emerald md:inline-flex" onClick={() => onNavigate('contacto')}>
-          Reserve una Mesa
+          Reservar
         </button>
 
         <button
@@ -631,11 +631,11 @@ function ContactPage() {
           </div>
           <p className="label text-gold">Contacto directo</p>
           <h2 className="mt-5 font-serif text-5xl leading-none">Te esperamos en CDMX</h2>
-          <div className="mt-10 space-y-7">
-            <ContactLine icon="clock" title="Horario" copy="Abierto todos los dias · 12:30 a 23:00 · Sabado hasta 22:00" />
-            <ContactLine icon="phone" title="Telefono" copy="+52 55 0000 0000" />
-            <ContactLine icon="pin" title="Direccion" copy="C. Rio Lerma 186, Cuauhtemoc, 06500, Ciudad de Mexico" />
-          </div>
+      <div className="mt-10 space-y-4">
+        <ContactLine icon="clock" title="Horario" copy="Abierto todos los dias · 12:30 a 23:00 · Sabado hasta 22:00" />
+        <ContactLine icon="phone" title="Telefono" copy="+52 55 0000 0000" />
+        <ContactLine icon="pin" title="Direccion" copy="C. Rio Lerma 186, Cuauhtemoc, 06500, Ciudad de Mexico" />
+      </div>
           <p className="mt-12 max-w-md font-accent text-xl italic text-ivory/75">
             Recomendamos reservar con 48 horas de anticipacion.
           </p>
@@ -711,10 +711,18 @@ function PageHero({ label, title, copy }) {
 }
 
 function ReservationForm() {
-  const fields = ['Nombre completo', 'Email', 'Telefono', 'Fecha', 'Hora', 'Numero de personas']
+  const fields = [
+    { label: 'Nombre completo', type: 'text', placeholder: 'Tu nombre' },
+    { label: 'Email', type: 'email', placeholder: 'correo@ejemplo.com' },
+    { label: 'Telefono', type: 'text', placeholder: '+52 55 0000 0000' },
+    { label: 'Numero de personas', type: 'text', placeholder: '2 personas' },
+    { label: 'Fecha', type: 'date', placeholder: '' },
+    { label: 'Hora', type: 'time', placeholder: '' },
+  ]
+
   return (
     <form
-      className="bg-ivory px-5 py-16 md:px-16 lg:px-24"
+      className="reservation-form bg-ivory px-5 py-12 md:px-16 md:py-14 lg:px-24"
       onSubmit={(event) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget)
@@ -726,18 +734,24 @@ function ReservationForm() {
     >
       <p className="label text-gold">Formulario</p>
       <h2 className="mt-5 font-serif text-5xl leading-none">Reserva tu mesa</h2>
-      <div className="mt-10 grid gap-5 md:grid-cols-2 md:gap-6">
+      <p className="mt-4 max-w-lg text-sm leading-7 text-charcoal/60">
+        Una solicitud breve, limpia y directa. Confirmamos disponibilidad por WhatsApp.
+      </p>
+      <div className="reservation-panel mt-8">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-5">
         {fields.map((field) => (
-          <label key={field} className="floating-field">
+          <label key={field.label} className="field-shell">
+            <span className="field-label">{field.label}</span>
             <input
-              name={field}
-              placeholder=" "
-              type={field === 'Email' ? 'email' : field === 'Fecha' ? 'date' : field === 'Hora' ? 'time' : 'text'}
+              className="field-input"
+              name={field.label}
+              placeholder={field.placeholder}
+              type={field.type}
               required
             />
-            <span>{field}</span>
           </label>
         ))}
+        </div>
       </div>
       <button className="btn btn-emerald mt-10 w-full justify-center" type="submit">Solicitar reservacion</button>
     </form>
@@ -746,7 +760,7 @@ function ReservationForm() {
 
 function ContactLine({ icon, title, copy }) {
   return (
-    <div className="flex gap-4">
+    <div className="contact-line">
       <ThinContactIcon icon={icon} />
       <div>
         <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">{title}</p>
