@@ -322,7 +322,6 @@ function HomePage({ onNavigate }) {
       <ReviewsCarousel />
       <TriptychSection />
       <IngredientsGrid />
-      <ExperienceSection />
     </>
   )
 }
@@ -508,18 +507,6 @@ function MenuPage() {
       <div className="section-padding pt-10">
         <div className="mx-auto max-w-[1240px]">
 
-          {/* Allergy notice */}
-          <div className="allergy-banner">
-            <svg className="mt-0.5 h-5 w-5 shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
-              <path d="M12 9v4M12 17h.01" />
-            </svg>
-            <p className="text-sm leading-7 text-charcoal/75">
-              <strong className="font-black text-charcoal">Informacion importante:</strong>{' '}
-              Consulte con su mesero sobre cualquier tipo de alergia o restriccion alimentaria antes de realizar su pedido. Su salud y seguridad son nuestra maxima prioridad.
-            </p>
-          </div>
-
           {/* Category tabs */}
           <div className="menu-tabs-wrap">
             <div className="menu-tabs">
@@ -568,6 +555,18 @@ function MenuPage() {
               </div>
             </motion.div>
           </AnimatePresence>
+
+          {/* Allergy notice */}
+          <div className="allergy-banner">
+            <svg className="mt-0.5 h-5 w-5 shrink-0 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+              <path d="M12 9v4M12 17h.01" />
+            </svg>
+            <p className="text-sm leading-7 text-charcoal/75">
+              <strong className="font-black text-charcoal">Informacion importante:</strong>{' '}
+              Consulte con su mesero sobre cualquier tipo de alergia o restriccion alimentaria antes de realizar su pedido. Su salud y seguridad son nuestra maxima prioridad.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -741,24 +740,6 @@ function AboutPage({ onNavigate }) {
         </Reveal>
       </section>
 
-      {/* Brand identity */}
-      <section className="section-padding">
-        <Reveal className="mx-auto grid max-w-[1180px] gap-10 md:grid-cols-[.9fr_1.1fr] md:items-center">
-          <div className="brand-card">
-            <img src={chefPlating} alt="" className="brand-card-photo" loading="lazy" decoding="async" />
-            <img src={logoFull} alt="Lemongrass Thai Cuisine" className="mx-auto w-72" />
-          </div>
-          <div>
-            <p className="label text-gold">Identidad</p>
-            <h2 className="mt-4 font-serif text-5xl leading-none">Minimalismo, oro y sombra</h2>
-            <p className="mt-6 text-base leading-8 text-charcoal/65">
-              La marca combina una silueta inspirada en arquitectura tailandesa con un lenguaje
-              editorial de CDMX: espacios amplios, dorado contenido y un esmeralda profundo que
-              sostiene la experiencia de principio a fin de cada noche.
-            </p>
-          </div>
-        </Reveal>
-      </section>
     </section>
   )
 }
@@ -806,52 +787,40 @@ function GalleryPage() {
 function Footer({ onNavigate }) {
   return (
     <footer className="bg-charcoal text-ivory">
-      <div className="mx-auto max-w-[1180px] px-5 py-16 md:px-10">
-        <div className="grid gap-12 md:grid-cols-3 md:gap-8">
-          {/* Col 1: Brand + address */}
+      <div className="mx-auto max-w-[1180px] px-5 py-12 md:px-10">
+        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+          {/* Col 1: Logo + Dirección */}
           <div>
-            <img src={logoText} alt="Lemongrass Thai Cuisine" className="mb-6 w-44 brightness-0 invert" />
-            <p className="label text-gold mb-3">Direccion</p>
-            <p className="text-sm leading-7 text-ivory/60">
-              C. Rio Lerma 186<br />
-              Cuauhtemoc, 06500<br />
-              Ciudad de Mexico
-            </p>
-            <p className="mt-5 label text-gold mb-2">Telefono</p>
-            <p className="text-sm text-ivory/60">+52 55 0000 0000</p>
+            <img src={logoText} alt="Lemongrass Thai Cuisine" className="mb-5 w-40 brightness-0 invert" />
+            <p className="label text-gold mb-2">Direccion</p>
+            <p className="text-sm leading-6 text-ivory/60">C. Rio Lerma 186, Cuauhtemoc<br />06500, Ciudad de Mexico</p>
           </div>
 
-          {/* Col 2: Hours */}
+          {/* Col 2: Contacto */}
           <div>
-            <p className="label text-gold mb-4">Horarios de Atencion</p>
+            <p className="label text-gold mb-4">Contacto</p>
             <div className="space-y-3">
-              <div className="flex justify-between gap-4 border-b border-ivory/8 pb-3">
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-ivory/50">Lun - Vie</span>
-                <span className="text-sm text-ivory/72">12:30 - 23:00</span>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-ivory/40 mb-0.5">Telefono</p>
+                <p className="text-sm text-ivory/70">+52 55 0000 0000</p>
               </div>
-              <div className="flex justify-between gap-4 border-b border-ivory/8 pb-3">
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-ivory/50">Sabado</span>
-                <span className="text-sm text-ivory/72">12:30 - 22:00</span>
-              </div>
-              <div className="flex justify-between gap-4">
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-ivory/50">Domingo</span>
-                <span className="text-sm text-ivory/72">13:00 - 21:00</span>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-ivory/40 mb-0.5">Horario</p>
+                <p className="text-sm text-ivory/70">Lun - Vie 12:30 - 23:00</p>
+                <p className="text-sm text-ivory/70">Sab 12:30 - 22:00 · Dom 13:00 - 21:00</p>
               </div>
             </div>
           </div>
 
-          {/* Col 3: Social */}
+          {/* Col 3: Redes Sociales */}
           <div>
             <p className="label text-gold mb-4">Redes Sociales</p>
-            <div className="flex gap-4 mb-4">
+            <div className="flex gap-4 mb-3">
               <SocialIcon type="instagram" />
               <SocialIcon type="facebook" />
               <SocialIcon type="tiktok" />
             </div>
-            <p className="text-xs text-ivory/40 mb-6">@lemongrass_cuisine</p>
-            <p className="text-sm leading-7 text-ivory/60">
-              Siguenos para ver los ultimos platillos, cocteles de temporada y eventos especiales.
-            </p>
+            <p className="text-xs text-ivory/40">@lemongrass_cuisine</p>
           </div>
         </div>
       </div>
