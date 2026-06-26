@@ -7,6 +7,7 @@
 :root {
   --gold: #C89B2F;
   --emerald: #0F5C4D;
+  --emerald-deep: #0A3C31;
   --ivory: #F8F5EE;
   --charcoal: #232323;
   --line: rgba(200, 155, 47, 0.38);
@@ -58,6 +59,8 @@ img {
   color: var(--charcoal);
 }
 
+/* ── Color utilities ─────────────────────────────────────────────────────── */
+
 .bg-ivory {
   background:
     radial-gradient(circle at 100% 0%, rgba(200, 155, 47, 0.07), transparent 24rem),
@@ -87,6 +90,8 @@ img {
 .text-charcoal {
   color: var(--charcoal);
 }
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
 
 .font-serif {
   font-family: "EB Garamond", Georgia, serif;
@@ -118,6 +123,8 @@ img {
   line-height: 1.6;
   text-transform: uppercase;
 }
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
 
 .btn {
   align-items: center;
@@ -155,18 +162,54 @@ img {
   color: var(--charcoal);
 }
 
+/* ── Navigation (emerald theme) ──────────────────────────────────────────── */
+
 .nav-shell {
-  background: rgba(248, 245, 238, 0.72);
-  border-bottom: 1px solid rgba(200, 155, 47, 0.18);
-  backdrop-filter: blur(16px);
+  background: rgba(10, 60, 48, 0.97);
+  border-bottom: 1px solid rgba(200, 155, 47, 0.22);
+  backdrop-filter: blur(18px);
   transition: background-color 220ms ease, box-shadow 220ms ease;
 }
 
 .nav-shell.is-scrolled {
-  background: rgba(248, 245, 238, 0.94);
-  box-shadow: 0 18px 45px rgba(35, 35, 35, 0.08);
+  background: rgba(8, 50, 40, 0.99);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.24);
 }
 
+.nav-link-emerald {
+  color: rgba(248, 245, 238, 0.78);
+  font-family: Manrope, "Helvetica Neue", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  position: relative;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.nav-link-emerald:hover {
+  color: var(--ivory);
+}
+
+.nav-link-emerald::after {
+  background: var(--gold);
+  bottom: -8px;
+  content: "";
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+  width: 100%;
+}
+
+.nav-link-emerald:hover::after,
+.nav-link-emerald.is-active::after {
+  transform: scaleX(1);
+}
+
+/* keep .nav-link for footer */
 .nav-link {
   color: currentColor;
   font-family: Manrope, "Helvetica Neue", sans-serif;
@@ -195,6 +238,8 @@ img {
   transform: scaleX(1);
 }
 
+/* ── Hamburger ───────────────────────────────────────────────────────────── */
+
 .hamburger {
   align-items: center;
   background: transparent;
@@ -220,6 +265,19 @@ img {
   width: 16px;
 }
 
+.hamburger.hamburger-light span {
+  background: var(--ivory);
+}
+
+.hamburger.hamburger-light {
+  border-color: rgba(248, 245, 238, 0.2);
+}
+
+.hamburger.hamburger-light:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(200, 155, 47, 0.4);
+}
+
 .hamburger:hover {
   background: rgba(255, 255, 255, 0.28);
   border-color: rgba(200, 155, 47, 0.32);
@@ -236,6 +294,8 @@ img {
 .hamburger.is-open span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
+
+/* ── Mobile drawer ───────────────────────────────────────────────────────── */
 
 .drawer-close {
   background: rgba(248, 245, 238, 0.08);
@@ -264,6 +324,8 @@ img {
   color: var(--ivory);
   transform: translateX(4px);
 }
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
 
 .hero-stage,
 .page-hero {
@@ -297,30 +359,7 @@ img {
     linear-gradient(135deg, rgba(200, 155, 47, 0.08), transparent 42%);
 }
 
-.hero-plate {
-  background:
-    radial-gradient(circle at 48% 48%, rgba(248, 245, 238, 0.18) 0 3%, transparent 4%),
-    radial-gradient(circle at 42% 42%, #d8452d 0 6%, transparent 7%),
-    radial-gradient(circle at 60% 58%, #e4d9a4 0 5%, transparent 6%),
-    conic-gradient(from 45deg, #6baa62, #f2d575, #c7442d, #0f5c4d, #6baa62),
-    radial-gradient(circle, #111 0 52%, #050505 53% 60%, rgba(200, 155, 47, 0.65) 61% 62%, transparent 63%);
-  border-radius: 50%;
-  filter: saturate(1.05);
-  opacity: 0.95;
-  overflow: hidden;
-  position: relative;
-}
-
-.hero-plate::before {
-  background:
-    linear-gradient(120deg, transparent 0 38%, rgba(248, 245, 238, 0.38) 39% 41%, transparent 42%),
-    repeating-linear-gradient(92deg, rgba(248, 245, 238, 0.18) 0 7px, transparent 7px 17px);
-  border-radius: 50%;
-  content: "";
-  inset: 20%;
-  opacity: 0.55;
-  position: absolute;
-}
+/* ── Cards / frames ──────────────────────────────────────────────────────── */
 
 .food-frame {
   aspect-ratio: 4 / 5;
@@ -464,6 +503,206 @@ img {
   width: 100%;
 }
 
+/* ── Reviews carousel ────────────────────────────────────────────────────── */
+
+.reviews-carousel {
+  overflow: hidden;
+  position: relative;
+  padding: 8px 0 24px;
+}
+
+.reviews-carousel::before,
+.reviews-carousel::after {
+  content: "";
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100px;
+  z-index: 2;
+}
+
+.reviews-carousel::before {
+  background: linear-gradient(90deg, #fbf8f1 0%, transparent 100%);
+  left: 0;
+}
+
+.reviews-carousel::after {
+  background: linear-gradient(270deg, #fbf8f1 0%, transparent 100%);
+  right: 0;
+}
+
+.reviews-track {
+  animation: scroll-reviews 42s linear infinite;
+  display: flex;
+  gap: 20px;
+  padding: 0 20px;
+  width: max-content;
+}
+
+.reviews-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-reviews {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.review-card {
+  background: #ffffff;
+  border: 1px solid rgba(200, 155, 47, 0.14);
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: 0 8px 28px rgba(35, 35, 35, 0.07);
+  flex: 0 0 340px;
+  padding: 24px 26px;
+  width: 340px;
+}
+
+.review-card-header {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.review-avatar {
+  align-items: center;
+  background: var(--emerald);
+  border-radius: 50%;
+  color: var(--ivory);
+  display: flex;
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 700;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.review-stars {
+  color: #fbbc04;
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.review-text {
+  color: rgba(35, 35, 35, 0.7);
+  font-size: 13.5px;
+  line-height: 1.72;
+  margin: 0;
+}
+
+.review-date {
+  color: rgba(35, 35, 35, 0.35);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-top: 14px;
+  text-transform: uppercase;
+}
+
+/* ── Triptych ────────────────────────────────────────────────────────────── */
+
+.triptych {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 420px;
+}
+
+.triptych-panel {
+  overflow: hidden;
+  position: relative;
+}
+
+.triptych-panel img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms ease;
+  width: 100%;
+}
+
+.triptych-panel:hover img {
+  transform: scale(1.05);
+}
+
+.triptych-overlay {
+  background: linear-gradient(180deg, rgba(35, 35, 35, 0.18) 0%, rgba(35, 35, 35, 0.72) 100%);
+  inset: 0;
+  position: absolute;
+  transition: background 400ms ease;
+}
+
+.triptych-panel:hover .triptych-overlay {
+  background: linear-gradient(180deg, rgba(15, 92, 77, 0.28) 0%, rgba(35, 35, 35, 0.78) 100%);
+}
+
+.triptych-label {
+  bottom: 24px;
+  left: 24px;
+  position: absolute;
+  z-index: 1;
+}
+
+/* ── Ingredients 3x3 grid ────────────────────────────────────────────────── */
+
+.ingredients-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.ingredient-card {
+  background: rgba(255, 252, 246, 0.82);
+  border: 1px solid rgba(200, 155, 47, 0.18);
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 6px 20px rgba(35, 35, 35, 0.06);
+  padding: 24px 22px;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.ingredient-card:hover {
+  box-shadow: 0 14px 36px rgba(35, 35, 35, 0.1);
+  transform: translateY(-2px);
+}
+
+.ingredient-number {
+  color: rgba(200, 155, 47, 0.7);
+  font-family: Manrope, "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  margin: 0 0 10px;
+}
+
+.ingredient-name {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0 0 4px;
+}
+
+.ingredient-origin {
+  color: var(--gold);
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.ingredient-desc {
+  color: rgba(35, 35, 35, 0.6);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Menu page (card grid) ───────────────────────────────────────────────── */
+
 .menu-tabs-wrap {
   background:
     linear-gradient(180deg, rgba(248, 245, 238, 0.97), rgba(248, 245, 238, 0.92));
@@ -473,7 +712,7 @@ img {
   box-shadow:
     0 16px 36px rgba(35, 35, 35, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   padding: 14px;
   position: sticky;
   top: 84px;
@@ -527,105 +766,125 @@ img {
   box-shadow: 0 12px 26px rgba(35, 35, 35, 0.12);
 }
 
-.menu-art-panel {
-  background:
-    radial-gradient(circle at 70% 20%, rgba(200, 155, 47, 0.15), transparent 18rem),
-    var(--emerald);
-  border-radius: 26px 26px 6px 26px;
-  box-shadow: 0 30px 70px rgba(35, 35, 35, 0.18);
-  position: relative;
-}
-
-.menu-art-image {
-  height: 100%;
-  inset: 0;
-  object-fit: cover;
-  opacity: 0.48;
-  position: absolute;
-  width: 100%;
-}
-
-.menu-row {
+.allergy-banner {
   align-items: flex-start;
-  border-bottom: 1px dashed rgba(35, 35, 35, 0.22);
-  border-radius: 20px;
+  background: rgba(200, 155, 47, 0.08);
+  border: 1px solid rgba(200, 155, 47, 0.26);
+  border-radius: 14px;
   display: flex;
-  gap: 18px;
-  padding: 24px 0;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding: 16px 20px;
+}
+
+.menu-category-header {
+  border-left: 3px solid var(--gold);
+  margin-bottom: 28px;
+  padding-left: 18px;
+}
+
+.menu-cards-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.menu-card {
+  background: rgba(255, 252, 246, 0.9);
+  border: 1px solid rgba(200, 155, 47, 0.16);
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 8px 24px rgba(35, 35, 35, 0.07);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   text-align: left;
-  transition: background-color 160ms ease, padding 160ms ease;
-  width: 100%;
+  transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.menu-row:hover {
-  background: rgba(200, 155, 47, 0.055);
-  padding-left: 14px;
-  padding-right: 14px;
+.menu-card:hover {
+  box-shadow: 0 18px 44px rgba(35, 35, 35, 0.13);
+  transform: translateY(-4px);
 }
 
-.dish-thumb {
-  border: 1px solid rgba(200, 155, 47, 0.32);
-  border-radius: 16px 16px 4px 16px;
-  box-shadow: 0 18px 38px rgba(35, 35, 35, 0.12);
-  flex: 0 0 112px;
-  height: 112px;
+.menu-card-image {
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
   overflow: hidden;
   position: relative;
 }
 
-.dish-thumb::after {
-  background: linear-gradient(180deg, transparent 45%, rgba(35, 35, 35, 0.34));
+.menu-card-image::after {
+  background: linear-gradient(180deg, transparent 52%, rgba(35, 35, 35, 0.26));
   content: "";
   inset: 0;
   position: absolute;
 }
 
-.dish-thumb img {
+.menu-card-image img {
   height: 100%;
   object-fit: cover;
-  transition: transform 460ms ease, filter 220ms ease;
+  transition: transform 420ms ease;
   width: 100%;
 }
 
-.menu-row:hover .dish-thumb img {
-  filter: saturate(1.08);
-  transform: scale(1.07);
+.menu-card:hover .menu-card-image img {
+  transform: scale(1.06);
 }
 
-.menu-row-index {
-  color: rgba(200, 155, 47, 0.85);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  margin-top: 8px;
+.menu-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
 }
 
-.menu-row .price {
-  color: var(--gold);
+.menu-card-name {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.menu-card-desc {
+  color: rgba(35, 35, 35, 0.58);
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  flex: 1;
   font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  margin-top: 8px;
-  white-space: nowrap;
+  -webkit-line-clamp: 2;
+  line-height: 1.65;
+  margin: 0;
+  overflow: hidden;
 }
 
-.chip {
-  display: inline-flex;
+.menu-card-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.menu-card-option {
+  background: rgba(15, 92, 77, 0.08);
+  border: 1px solid rgba(15, 92, 77, 0.16);
+  border-radius: 999px;
+  color: var(--emerald);
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  padding: 5px 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 9px;
   text-transform: uppercase;
 }
 
-.chip.gold {
-  background: rgba(200, 155, 47, 0.15);
+.menu-card-price {
   color: var(--gold);
-}
-
-.chip.emerald {
-  background: rgba(15, 92, 77, 0.14);
-  color: var(--emerald);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  margin: 0;
+  padding-top: 4px;
 }
 
 .dish-sheet-image {
@@ -650,141 +909,148 @@ img {
   width: 100%;
 }
 
-.floating-field {
-  display: block;
-  padding-top: 18px;
+.chip {
+  display: inline-flex;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  padding: 5px 8px;
+  text-transform: uppercase;
+}
+
+.chip.gold {
+  background: rgba(200, 155, 47, 0.15);
+  color: var(--gold);
+}
+
+.chip.emerald {
+  background: rgba(15, 92, 77, 0.14);
+  color: var(--emerald);
+}
+
+/* ── About page ──────────────────────────────────────────────────────────── */
+
+.contact-card-static {
+  align-items: flex-start;
+  background: rgba(15, 92, 77, 0.05);
+  border: 1px solid rgba(15, 92, 77, 0.13);
+  border-radius: 14px;
+  display: flex;
+  gap: 14px;
+  padding: 18px 20px;
+}
+
+.about-photo-card {
+  border: 1px solid rgba(200, 155, 47, 0.26);
+  border-radius: 18px 18px 4px 18px;
+  height: 220px;
+  overflow: hidden;
   position: relative;
 }
 
-.floating-field input {
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid rgba(15, 92, 77, 0.5);
-  border-radius: 0;
-  color: var(--charcoal);
-  min-height: 48px;
-  outline: none;
-  padding: 14px 0 10px;
-  width: 100%;
-}
-
-.contact-photo {
-  border: 1px solid rgba(200, 155, 47, 0.28);
-  border-radius: 22px 22px 4px 22px;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
-  height: 220px;
-  overflow: hidden;
-}
-
-.contact-photo img {
+.about-photo-card img {
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
 
-.contact-line {
-  align-items: flex-start;
-  background: linear-gradient(135deg, rgba(248, 245, 238, 0.08), rgba(248, 245, 238, 0.03));
-  border: 1px solid rgba(248, 245, 238, 0.12);
-  border-radius: 18px 18px 4px 18px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  display: flex;
-  gap: 14px;
-  padding: 16px 18px;
+.about-photo-card-overlay {
+  background: linear-gradient(180deg, transparent 20%, rgba(10, 60, 48, 0.82));
+  bottom: 0;
+  left: 0;
+  padding: 20px 22px;
+  position: absolute;
+  right: 0;
 }
 
-.reservation-panel {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(248, 245, 238, 0.94));
-  border: 1px solid rgba(200, 155, 47, 0.18);
-  border-radius: 26px 26px 6px 26px;
-  box-shadow:
-    0 20px 52px rgba(35, 35, 35, 0.07),
-    inset 0 1px 0 rgba(255, 255, 255, 0.72);
-  padding: 18px;
+/* ── Gallery ─────────────────────────────────────────────────────────────── */
+
+.gallery-grid {
+  column-count: 3;
+  column-gap: 16px;
 }
 
-.field-shell {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.gallery-item {
+  border: 1px solid rgba(200, 155, 47, 0.16);
+  border-radius: 16px 16px 4px 16px;
+  break-inside: avoid;
+  margin-bottom: 16px;
+  overflow: hidden;
+  position: relative;
 }
 
-.field-label {
-  color: rgba(35, 35, 35, 0.52);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.field-input {
-  background: rgba(255, 255, 255, 0.74);
-  border: 1px solid rgba(35, 35, 35, 0.08);
-  border-radius: 14px;
-  color: var(--charcoal);
-  min-height: 52px;
-  outline: none;
-  padding: 0 16px;
-  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+.gallery-item img {
+  display: block;
+  transition: transform 420ms ease;
   width: 100%;
 }
 
-.field-input::placeholder {
-  color: rgba(35, 35, 35, 0.34);
+.gallery-item:hover img {
+  transform: scale(1.04);
 }
 
-.field-input:hover {
-  border-color: rgba(200, 155, 47, 0.22);
+.gallery-item::after {
+  background: linear-gradient(180deg, transparent 55%, rgba(35, 35, 35, 0.6));
+  content: "";
+  inset: 0;
+  position: absolute;
 }
 
-.field-input:focus {
-  background: rgba(255, 255, 255, 0.96);
-  border-color: rgba(200, 155, 47, 0.55);
-  box-shadow: 0 0 0 4px rgba(200, 155, 47, 0.08);
-}
-
-.field-input[type="date"],
-.field-input[type="time"] {
-  appearance: none;
-}
-
-.floating-field span {
-  color: rgba(35, 35, 35, 0.52);
-  font-size: 12px;
+.gallery-caption {
+  bottom: 14px;
+  color: var(--ivory);
+  font-size: 10px;
   font-weight: 800;
-  left: 0;
-  letter-spacing: 0.16em;
-  pointer-events: none;
+  left: 16px;
+  letter-spacing: 0.22em;
   position: absolute;
   text-transform: uppercase;
-  top: 32px;
-  transition: transform 160ms ease, color 160ms ease, font-size 160ms ease;
+  z-index: 1;
 }
 
-.floating-field input:focus {
-  border-bottom-color: var(--gold);
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+
+.footer-breadcrumb {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
 }
 
-.floating-field input[type="date"],
-.floating-field input[type="time"] {
-  appearance: none;
+.footer-breadcrumb-item {
+  align-items: center;
+  display: flex;
+  gap: 2px;
 }
 
-.floating-field input:focus + span,
-.floating-field input:not(:placeholder-shown) + span {
-  color: var(--gold);
+.footer-breadcrumb-sep {
+  color: rgba(248, 245, 238, 0.2);
+  font-size: 11px;
+  padding: 0 4px;
+}
+
+.footer-breadcrumb-link {
+  color: rgba(248, 245, 238, 0.48);
   font-size: 10px;
-  transform: translateY(-24px);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  padding: 4px 6px;
+  text-transform: uppercase;
+  transition: color 180ms ease;
 }
+
+.footer-breadcrumb-link:hover {
+  color: var(--gold);
+}
+
+/* ── Shared / scroll cue ─────────────────────────────────────────────────── */
 
 .scroll-cue {
   animation: cue 1.6s ease-in-out infinite;
 }
 
 @keyframes cue {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 0.35;
     transform: translate(-50%, 0);
   }
@@ -794,22 +1060,12 @@ img {
   }
 }
 
-.floating-reserve {
-  background: rgba(15, 92, 77, 0.96);
-  border: 1px solid rgba(200, 155, 47, 0.34);
-  border-radius: 999px;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  color: var(--ivory);
-  display: none;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.22em;
-  padding: 12px 18px;
-  position: fixed;
-  right: 16px;
-  box-shadow: 0 16px 38px rgba(35, 35, 35, 0.2);
-  text-transform: uppercase;
-  z-index: 45;
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .menu-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 767px) {
@@ -828,50 +1084,51 @@ img {
   }
 
   .nav-shell {
-    background: rgba(248, 245, 238, 0.88);
+    background: rgba(8, 50, 40, 0.98);
   }
 
   .nav-shell.is-scrolled {
-    background: rgba(248, 245, 238, 0.96);
-    box-shadow: 0 14px 36px rgba(35, 35, 35, 0.08);
+    background: rgba(6, 42, 33, 0.99);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
   }
 
   .hamburger {
     border-radius: 12px;
   }
 
-  .floating-reserve {
-    display: block;
-    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    padding: 11px 16px;
-    right: 14px;
+  .triptych {
+    grid-template-columns: 1fr;
+    height: auto;
   }
 
-  .menu-row {
-    display: grid;
-    grid-template-columns: 92px 1fr;
-    gap: 10px 14px;
-    padding: 16px 14px;
+  .triptych-panel {
+    height: 260px;
   }
 
-  .menu-row-index {
-    display: none;
+  .ingredients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
-  .menu-row .price {
-    grid-column: 2;
-    justify-self: start;
-    margin-top: 0;
+  .ingredient-card {
+    padding: 18px 16px;
   }
 
-  .dish-thumb {
-    align-self: start;
-    flex-basis: auto;
-    grid-row: span 2;
-    height: 92px;
-    width: 92px;
+  .ingredient-name {
+    font-size: 19px;
+  }
+
+  .menu-cards-grid {
+    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menu-card-name {
+    font-size: 17px;
+  }
+
+  .menu-category-header {
+    margin-bottom: 20px;
   }
 
   .menu-tabs-wrap {
@@ -895,8 +1152,13 @@ img {
     padding: 11px 14px;
   }
 
-  .signature-card {
-    min-height: auto;
+  .allergy-banner {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+  }
+
+  .gallery-grid {
+    column-count: 2;
   }
 
   .highlight-card {
@@ -904,34 +1166,10 @@ img {
     padding: 28px;
   }
 
-  .contact-photo {
-    height: 188px;
-  }
-
-  .contact-line {
-    padding: 14px 15px;
-  }
-
-  .reservation-panel {
-    border-radius: 22px 22px 6px 22px;
-    padding: 14px;
-  }
-
-  .field-shell {
-    gap: 7px;
-  }
-
-  .field-input {
-    min-height: 48px;
-    padding: 0 14px;
-  }
-
   .brand-card,
   .feature-image,
-  .menu-art-panel,
-  .contact-photo,
-  .dish-thumb,
-  .dish-sheet-image {
+  .dish-sheet-image,
+  .about-photo-card {
     border-radius: 18px 18px 4px 18px;
   }
 
@@ -943,6 +1181,26 @@ img {
 
   .feature-caption strong {
     font-size: 28px;
+  }
+
+  .review-card {
+    flex: 0 0 290px;
+    width: 290px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ingredients-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    column-count: 1;
   }
 }
 
