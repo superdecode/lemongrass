@@ -891,7 +891,7 @@ img {
   border: 1px solid rgba(200, 155, 47, 0.32);
   border-radius: 24px 24px 5px 24px;
   box-shadow: 0 24px 60px rgba(35, 35, 35, 0.18);
-  height: clamp(220px, 36vw, 360px);
+  height: clamp(160px, 24vw, 220px);
   overflow: hidden;
   position: relative;
 }
@@ -921,6 +921,47 @@ img {
 .chip.gold {
   background: rgba(200, 155, 47, 0.15);
   color: var(--gold);
+}
+
+.dish-opt-btn {
+  border: 1px solid rgba(200, 155, 47, 0.3);
+  border-radius: 10px 10px 2px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 10px;
+  text-align: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.dish-opt-btn:hover {
+  background: rgba(200, 155, 47, 0.06);
+  border-color: rgba(200, 155, 47, 0.6);
+}
+
+.dish-opt-btn.is-active {
+  background: var(--emerald);
+  border-color: var(--emerald);
+}
+
+.dish-opt-btn.is-active .dish-opt-label,
+.dish-opt-btn.is-active .dish-opt-price {
+  color: var(--ivory);
+}
+
+.dish-opt-label {
+  color: var(--charcoal);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dish-opt-price {
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 900;
 }
 
 .chip.emerald {

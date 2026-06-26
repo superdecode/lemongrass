@@ -73,13 +73,13 @@ const ingredients = [
 const triptychImages = [
   { src: heroInterior, alt: 'Interior del restaurante Lemongrass', label: 'Ambiente' },
   { src: signatureDishes, alt: 'Platillos emblematicos de Lemongrass', label: 'Cocina Thai' },
-  { src: chefPlating, alt: 'Chef en accion en Lemongrass', label: 'Alta Cocina' },
+  { src: chefPlating, alt: 'Cocteleria Lemongrass', label: 'Cocteleria' },
 ]
 
 const galleryImages = [
   { src: heroInterior, alt: 'Interior del restaurante', caption: 'Ambiente' },
   { src: signatureDishes, alt: 'Platillos signature', caption: 'Cocina' },
-  { src: chefPlating, alt: 'Chef en accion', caption: 'Alta Cocina' },
+  { src: chefPlating, alt: 'Cocteleria Lemongrass', caption: 'Cocteleria' },
   { src: categorySalads, alt: 'Ensaladas frescas', caption: 'Ensaladas' },
   { src: categorySoups, alt: 'Sopas aromaticas', caption: 'Sopas' },
   { src: categoryEntradas, alt: 'Entradas para compartir', caption: 'Entradas' },
@@ -191,7 +191,7 @@ function Nav({ activePage, drawerOpen, scrolled, onNavigate, onToggleDrawer }) {
           <span className="leading-none">
             <span className="block font-serif text-[20px] text-gold md:text-[22px]">Lemongrass</span>
             <span className="block font-sans text-[8px] font-bold uppercase tracking-[0.28em] text-ivory/75 md:text-[9px] md:tracking-[0.32em]">
-              Thai Cuisine
+              Thai Cuisine & Cocktails
             </span>
           </span>
         </button>
@@ -284,14 +284,14 @@ function HomePage({ onNavigate }) {
           <p className="label text-gold">Ciudad de Mexico · Cocina Tailandesa</p>
           <div className="mx-auto my-7 h-px w-20 bg-gold" />
           <h1 className="font-serif text-[38px] font-medium leading-[0.95] sm:text-[44px] md:text-[72px]">
-            Una experiencia culinaria
+            Una sala thai moderna
             <br />
-            desde Bangkok
+            para comidas elegantes
             <br />
-            hasta el corazon de CDMX
+            y noches que se alargan
           </h1>
           <p className="mx-auto mt-6 max-w-2xl px-2 font-accent text-lg italic text-ivory/75 sm:text-xl md:mt-7 md:text-2xl">
-            Sabores autenticos. Presentacion de alta cocina. Cocteleria de autor.
+            Cocina thai de calidad, precios accesibles y cocteles botanicos que invitan a quedarse.
           </p>
 
           {/* Value proposition pillars */}
@@ -335,16 +335,16 @@ function AboutTeaser({ onNavigate }) {
           Donde Bangkok se encuentra con la Ciudad de Mexico
         </h2>
         <p className="mt-8 max-w-2xl text-base leading-8 text-charcoal/70 md:text-lg">
-          Lemongrass nace como una mesa de contrastes: hierbas frescas, fuego de wok, caldos
-          pacientes y una vision contemporanea de servicio. En CDMX, cada plato traduce la
-          hospitalidad tailandesa con una cadencia refinada, precisa y profundamente sensorial.
+          Lemongrass nace con una idea clara: cocina thai de verdad en CDMX, sin pretension
+          y sin sacrificar nada. Un lugar comodo para comer bien de dia y para quedarse
+          con un coctel cuando cae la noche.
         </p>
         <div className="my-9 h-px max-w-xl bg-gold/60" />
         <p className="font-accent text-2xl italic text-charcoal/80">
-          La gastronomia tailandesa es un arte de contrastes
+          Cocina real, especias verdaderas, cocteles de autor.
         </p>
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
-          {['12 anos de experiencia', 'Ingredientes importados', 'Chef reconocido'].map((stat) => (
+          {['Ingredientes importados', 'Recetas de autor', 'Cocteleria botanica'].map((stat) => (
             <div key={stat} className="border-l border-gold pl-4">
               <p className="font-sans text-xs font-bold uppercase tracking-[0.22em] text-charcoal/55">{stat}</p>
             </div>
@@ -600,7 +600,11 @@ function MenuCard({ item, categoryId, index, onSelect }) {
             ))}
           </div>
         )}
-        <p className="menu-card-price">{formatPrice(item.price)}</p>
+        <p className="menu-card-price">
+          {item.options
+            ? `Desde ${formatPrice(Math.min(...item.options.map((o) => o.price)))}`
+            : formatPrice(item.price)}
+        </p>
       </div>
     </button>
   )
@@ -610,6 +614,8 @@ function DishSheet({ dish, onClose }) {
   const category = menuCategories.find((c) => c.label === dish.category)
   const dishIndex = category?.items.findIndex((i) => i.id === dish.id) ?? 0
   const visual = getDishVisual(category?.id, Math.max(dishIndex, 0))
+  const [selectedOpt, setSelectedOpt] = useState(dish.options?.[0] ?? null)
+  const displayPrice = selectedOpt ? selectedOpt.price : dish.price
 
   return (
     <motion.div
@@ -620,36 +626,57 @@ function DishSheet({ dish, onClose }) {
       onClick={onClose}
     >
       <motion.article
-        initial={{ y: 80, opacity: 0 }}
+        initial={{ y: 60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 80, opacity: 0 }}
-        transition={{ type: 'spring', stiffness: 330, damping: 32 }}
+        exit={{ y: 60, opacity: 0 }}
+        transition={{ type: 'spring', stiffness: 340, damping: 34 }}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-2xl bg-ivory p-5 text-charcoal sm:p-7 md:p-10"
+        className="w-full max-w-md bg-ivory p-5 text-charcoal sm:p-6"
       >
-        <div className="dish-sheet-image mb-7">
+        <div className="dish-sheet-image mb-5">
           <img src={visual.image} alt={dish.name} style={{ objectPosition: visual.position }} loading="lazy" decoding="async" />
         </div>
-        <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div>
+
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <div className="min-w-0">
             <p className="label text-gold">{dish.category}</p>
-            <h3 className="mt-3 font-serif text-4xl leading-none sm:text-5xl">{dish.name}</h3>
+            <h3 className="mt-2 font-serif text-3xl leading-tight">{dish.name}</h3>
           </div>
-          <p className="w-fit shrink-0 bg-emerald px-4 py-2 text-sm font-black text-ivory">{formatPrice(dish.price)}</p>
+          <motion.p
+            key={displayPrice}
+            initial={{ scale: 0.88, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.18 }}
+            className="shrink-0 bg-emerald px-3 py-1.5 text-sm font-black text-ivory"
+          >
+            {formatPrice(displayPrice)}
+          </motion.p>
         </div>
-        <p className="text-lg leading-8 text-charcoal/75">{dish.description}</p>
-        <p className="mt-4 text-sm leading-7 text-charcoal/60">{dish.detail}</p>
+
+        <p className="text-sm leading-7 text-charcoal/70">{dish.description}</p>
+
         {dish.options && (
-          <div className="mt-7 grid grid-cols-2 gap-3 md:grid-cols-4">
-            {dish.options.map((opt) => (
-              <div key={opt.label} className="border border-gold/35 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.22em]">{opt.label}</p>
-                <p className="mt-2 text-gold">{formatPrice(opt.price)}</p>
-              </div>
-            ))}
+          <div className="mt-5">
+            <p className="label mb-3 text-charcoal/50">Elige tu variante</p>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {dish.options.map((opt) => (
+                <button
+                  key={opt.label}
+                  onClick={() => setSelectedOpt(opt)}
+                  className={cx(
+                    'dish-opt-btn',
+                    selectedOpt?.label === opt.label && 'is-active',
+                  )}
+                >
+                  <span className="dish-opt-label">{opt.label}</span>
+                  <span className="dish-opt-price">{formatPrice(opt.price)}</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
-        <button className="btn btn-emerald mt-8 w-full justify-center" onClick={onClose}>Cerrar</button>
+
+        <button className="btn btn-emerald mt-6 w-full justify-center" onClick={onClose}>Cerrar</button>
       </motion.article>
     </motion.div>
   )
@@ -676,20 +703,20 @@ function AboutPage({ onNavigate }) {
               Una vision moderna de la tradicion tailandesa
             </h2>
             <p className="mt-7 text-base leading-8 text-charcoal/70">
-              Lemongrass nace como una propuesta culinaria sin concesiones: ingredientes importados directamente de Tailandia, tecnicas de alta cocina y un servicio pensado para quienes aprecian los detalles. En el corazon de CDMX, cada plato es un viaje sensorial que parte desde Bangkok.
+              Lemongrass es cocina thai cuidada, accesible y sin protocolo. Ingredientes importados de Tailandia, recetas de autor y un ambiente donde cualquiera se siente bienvenido: desde una comida de negocios tranquila hasta una cena entre amigos.
             </p>
             <p className="mt-5 text-base leading-8 text-charcoal/70">
-              Por la noche, Lemongrass se transforma en un bar de cocteleria de autor. Nuestros mixologos crean tragos que dialogan con las especias thai: limoncillo, galanga, albahaca y kaffir lime en recetas unicas que no encontraras en ningun otro lugar de la ciudad.
+              Por la noche el ritmo cambia. Los cocteles pasan al centro: tragos de autor con limoncillo, galanga, albahaca thai y kaffir lime. Bebidas pensadas para alargar la noche y acompanar los sabores de la carta.
             </p>
             <p className="mt-5 text-base leading-8 text-charcoal/70">
-              Para eventos corporativos y celebraciones privadas, ofrecemos espacios y menus personalizados que elevan cualquier reunion a una experiencia memorable de cocina Thai moderna.
+              Para reuniones de trabajo o celebraciones privadas, ofrecemos un espacio tranquilo y menus a la medida. Un lugar discreto donde la buena comida hace el trabajo.
             </p>
             <div className="my-9 h-px max-w-sm bg-gold/40" />
             <p className="font-accent text-2xl italic text-charcoal/80">
-              La elegancia no es lujo. Es la precision de cada detalle.
+              Buena comida thai, cocteles que se recuerdan y un espacio donde siempre hay razon para volver.
             </p>
             <div className="mt-10 grid gap-5 sm:grid-cols-3">
-              {['12 anos de experiencia', 'Ingredientes importados', 'Chef reconocido'].map((stat) => (
+              {['Ingredientes importados', 'Recetas de autor', 'Cocteleria botanica'].map((stat) => (
                 <div key={stat} className="border-l border-gold pl-4">
                   <p className="font-sans text-xs font-bold uppercase tracking-[0.22em] text-charcoal/55">{stat}</p>
                 </div>
@@ -704,7 +731,7 @@ function AboutPage({ onNavigate }) {
             <div className="mt-8 space-y-4">
               <ContactCardStatic icon="pin" title="Direccion" copy="C. Rio Lerma 186, Cuauhtemoc, 06500, Ciudad de Mexico" />
               <ContactCardStatic icon="clock" title="Horarios" copy="Lunes a Viernes 12:30 - 23:00 · Sabado 12:30 - 22:00 · Domingo 13:00 - 21:00" />
-              <ContactCardStatic icon="phone" title="Telefono" copy="+52 55 0000 0000" />
+              <ContactCardStatic icon="phone" title="Telefono" copy="+52 56 4150 9563" />
             </div>
             <div className="about-photo-card mt-8">
               <img src={heroInterior} alt="Interior Lemongrass Thai Cuisine" loading="lazy" decoding="async" />
@@ -727,9 +754,9 @@ function AboutPage({ onNavigate }) {
       <section className="section-padding bg-emerald text-ivory">
         <Reveal className="mx-auto grid max-w-[1180px] gap-6 md:grid-cols-3">
           {[
-            ['Botanica Thai', 'Hierbas frescas, limoncillo, galanga y albahaca thai como base aromatica de cada servicio.'],
-            ['Cocteleria de Autor', 'Maridajes pensados para equilibrar acidez, dulzor, grasa y picante con tecnica mexicana.'],
-            ['Servicio Preciso', 'Servicio sobrio y atento, disenado para una noche de alta cocina moderna y elegante.'],
+            ['Botanica Thai', 'Limoncillo, galanga, albahaca thai y kaffir lime. El aroma que distingue cada platillo de la carta.'],
+            ['Cocteleria Botanica', 'Tragos de autor con especias thai y tecnica mexicana. La razon perfecta para quedarse mas tiempo.'],
+            ['Ambiente Casual', 'Sin protocolo y sin pretension. Comodo de dia para comer bien y agradable de noche para un buen coctel.'],
           ].map(([title, copy], index) => (
             <article key={title} className="highlight-card">
               <ThinIcon type={index} />
@@ -802,7 +829,7 @@ function Footer({ onNavigate }) {
             <div className="space-y-3">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-ivory/40 mb-0.5">Telefono</p>
-                <p className="text-sm text-ivory/70">+52 55 0000 0000</p>
+                <p className="text-sm text-ivory/70">+52 56 4150 9563</p>
               </div>
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-ivory/40 mb-0.5">Horario</p>
@@ -820,7 +847,7 @@ function Footer({ onNavigate }) {
               <SocialIcon type="facebook" />
               <SocialIcon type="tiktok" />
             </div>
-            <p className="text-xs text-ivory/40">@lemongrass_cuisine</p>
+            <p className="text-xs text-ivory/40">@lemongrassrestaurante</p>
           </div>
         </div>
       </div>
@@ -840,7 +867,7 @@ function Footer({ onNavigate }) {
               </span>
             ))}
           </nav>
-          <p className="text-xs text-ivory/30">© 2025 Lemongrass Thai Cuisine · Ciudad de Mexico</p>
+          <p className="text-xs text-ivory/30">© 2025 Lemongrass Thai Cuisine & Cocktails · Ciudad de Mexico</p>
         </div>
       </div>
     </footer>
@@ -903,15 +930,25 @@ function ThinContactIcon({ icon, className = 'mt-1 h-6 w-6 shrink-0 text-gold' }
   )
 }
 
+const socialLinks = {
+  instagram: 'https://www.instagram.com/lemongrassrestaurante/',
+  facebook: null,
+  tiktok: null,
+}
+
 function SocialIcon({ type }) {
   const paths = {
     instagram: <><rect x="4" y="4" width="16" height="16" rx="4" /><circle cx="12" cy="12" r="3.5" /><path d="M17 7.2h.01" /></>,
     facebook: <path d="M14 8h2V4h-2c-3 0-5 2-5 5v2H7v4h2v5h4v-5h3l1-4h-4V9c0-.6.4-1 1-1Z" />,
     tiktok: <path d="M14 4v9.5a4.5 4.5 0 1 1-4-4.47V13a1.5 1.5 0 1 0 1.5 1.5V4h2.5c.7 2 2 3.3 4 3.8v3.1c-1.7-.2-3-1-4-2.1Z" />,
   }
-  return (
+  const href = socialLinks[type]
+  const icon = (
     <svg className="h-6 w-6 text-ivory/60 transition-colors hover:text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round">
       {paths[type]}
     </svg>
   )
+  return href
+    ? <a href={href} target="_blank" rel="noopener noreferrer" aria-label={type}>{icon}</a>
+    : icon
 }
